@@ -18,13 +18,18 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
+
+    # - name: Install Chrome
+    #   uses: nanasess/setup-chromedriver@v2
         
-    - name: Restore dependencies
+    - name: Install dependencies
       run: dotnet restore
       
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Test
+    - name: Run test
+      env:
+        CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: dotnet test --no-build --verbosity normal
